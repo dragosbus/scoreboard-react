@@ -39,28 +39,32 @@ const Player = props => {
     return (
         <div className="player">
             <div className="player-name">{props.name}</div>
-            <CounterAction score={props.score}/>
+            <CounterAction/>
         </div>
     );
 };
 
-const PlayerScore = props => {
-    return (
-        <div className="counter-score">{props.score}</div>
-    );  
-};
-
 const CounterAction = React.createClass({
-    propTypes: {
-        score: React.PropTypes.number.isRequired
+    propTypes: {},
+
+    getInitialState() {
+        return {
+            score: 0
+        }
+    },
+
+    incrementScore(e) {
+        this.setState({
+            score: (this.state.score + 1)
+        })
     },
 
     render() {
         return (
             <div className="counter">
                 <button className="counter-action decrement">-</button>
-                <PlayerScore score={this.props.score} />
-                <button className="counter-action increment">+</button>
+                <div className="counter-score">{this.state.score}</div>
+                <button className="counter-action increment" onClick={this.incrementScore}>+</button>
             </div>
         );  
     }
