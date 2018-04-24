@@ -1,9 +1,28 @@
-const App = () => {
+const Players = [
+    {
+        name: "Dragos",
+        score: 32,
+        id:1
+    },
+    {
+        name: "Mihail",
+        score: 31,
+        id:2
+    },
+    {
+        name: "John",
+        score: 44,
+        id:3
+    }
+];
+
+const App = props => {
     return (
         <div className="scoreboard">
-            <Header title={3}/>
-            <Player name="Dragos" score={40}/>
-            <Player name="Mihail" score={30}/>
+            <Header title="ScoreBoard" />
+            <div className="players">
+                {props.players.map(player => <Player name={player.name} score={player.score} key={player.id}/>)}
+            </div>
         </div>
     );
 };
@@ -13,20 +32,30 @@ const Header = props => {
         <header className="header">
             <h1>{props.title}</h1>
         </header>
-    );  
+    );
 };
 
 const Player = props => {
     return (
         <div className="player">
             <div className="player-name">{props.name}</div>
-            <div className="player-score">
-                <div className="counter">
-                    <button className="counter-action decrement">-</button>
-                    <div className="counter-score">{props.score}</div>
-                    <button className="counter-action increment">+</button>
-                </div>
-            </div>
+            <CounterAction score={props.score}/>
+        </div>
+    );
+};
+
+const PlayerScore = props => {
+    return (
+        <div className="counter-score">{props.score}</div>
+    );  
+};
+
+const CounterAction = props => {
+    return (
+        <div className="counter">
+            <button className="counter-action decrement">-</button>
+            <PlayerScore score={props.score} />
+            <button className="counter-action increment">+</button>
         </div>
     );  
 };
@@ -35,11 +64,19 @@ Header.propTypes = {
     title: React.PropTypes.string
 };
 
-App.defaulProps = {
-    title:"Scoreboard"
+CounterAction.propTypes = {
+    score: React.PropTypes.number.isRequired
+};
+
+App.propTypes = {
+    players: React.PropTypes.arrayOf(React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+        score: React.PropTypes.number.isRequired,
+        id:React.PropTypes.number.isRequired
+    })).isRequired
 };
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('container')
+    <App players={Players}/>,
+    document.getElementById("container")
 );
