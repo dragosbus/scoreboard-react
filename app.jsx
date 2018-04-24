@@ -50,22 +50,24 @@ const PlayerScore = props => {
     );  
 };
 
-const CounterAction = props => {
-    return (
-        <div className="counter">
-            <button className="counter-action decrement">-</button>
-            <PlayerScore score={props.score} />
-            <button className="counter-action increment">+</button>
-        </div>
-    );  
-};
+const CounterAction = React.createClass({
+    propTypes: {
+        score: React.PropTypes.number.isRequired
+    },
+
+    render() {
+        return (
+            <div className="counter">
+                <button className="counter-action decrement">-</button>
+                <PlayerScore score={this.props.score} />
+                <button className="counter-action increment">+</button>
+            </div>
+        );  
+    }
+});
 
 Header.propTypes = {
     title: React.PropTypes.string
-};
-
-CounterAction.propTypes = {
-    score: React.PropTypes.number.isRequired
 };
 
 App.propTypes = {
