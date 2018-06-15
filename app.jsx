@@ -13,6 +13,7 @@ class App extends React.Component {
         }
         this.onScoreChange = this.onScoreChange.bind(this);
         this.addPlayer = this.addPlayer.bind(this);
+        this.removePlayer = this.removePlayer.bind(this);
     }
 
     onScoreChange(index, delta) {
@@ -28,12 +29,20 @@ class App extends React.Component {
         let newPlayer = {
             name: name,
             score: 0,
-            id: this.state.players[this.state.players.length - 1].id + 1
+            id: this.state.players[this.state.players.length - 1] ? 
+            this.state.players[this.state.players.length - 1].id + 1 : 1
         }
         this.setState(prevState=>{
             return{
                 players: prevState.players.concat(newPlayer)
             }
+        });
+    }
+
+    removePlayer(index) {
+        this.state.players.splice(index,1);
+        this.setState({
+            players: this.state.players
         });
     }
 
@@ -48,7 +57,7 @@ class App extends React.Component {
                                 onScoreChange={delta=>this.onScoreChange(index, delta)}
                                 name={player.name}
                                 score={player.score}
-                                key={player.id} />
+                                key={player.id} removePlayer={()=>this.removePlayer(index)}/>
                         );
                     })}
                 </div>
@@ -69,6 +78,7 @@ const Header = props => {
 const Player = props => {
     return (
         <div className="player">
+            <button className="remove-player" onClick={props.removePlayer}>X</button>
             <div className="player-name">{props.name}</div>
             <CounterAction score={props.score} onChange={props.onScoreChange}/>
         </div>

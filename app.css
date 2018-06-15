@@ -103,9 +103,11 @@ body {
     margin-right: 10px;
     color: #e57373;
     cursor: pointer;
+    background: none;
+    border: none;
 }
 
-.player-name:hover .remove-player {
+.player:hover .remove-player {
     visibility: visible;
 }
 
