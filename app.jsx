@@ -12,6 +12,7 @@ class App extends React.Component {
             ]
         }
         this.onScoreChange = this.onScoreChange.bind(this);
+        this.addPlayer = this.addPlayer.bind(this);
     }
 
     onScoreChange(index, delta) {
@@ -20,6 +21,19 @@ class App extends React.Component {
         this.setState(prevState=>{
             return {
                 players: prevState.players.splice(index, 1).splice(index, 1, user)
+            }
+        });
+    }
+
+    addPlayer(name) {
+        let newPlayer = {
+            name: name,
+            score: 0,
+            id: this.state.players[this.state.players.length - 1].id + 1
+        }
+        this.setState(prevState=>{
+            return{
+                players: prevState.players.concat(newPlayer)
             }
         });
     }
@@ -39,6 +53,7 @@ class App extends React.Component {
                         );
                     })}
                 </div>
+                <AddPlayer addPlayer={this.addPlayer}/>
             </div>
         );
     }
@@ -71,6 +86,27 @@ const CounterAction = props => {
         </div>
     );  
 };
+
+class AddPlayer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.addPlayer = this.addPlayer.bind(this);
+    }
+
+    addPlayer(e) {
+        e.preventDefault();
+        this.props.addPlayer(this._name.value);
+    }
+
+    render() {
+        return (
+            <form className="add-player-form" onSubmit={this.addPlayer}>
+                <input ref={name=>this._name=name} type="text" placeholder="Player Name"/>
+                <input type="submit" value="Add"/>
+            </form>
+        );
+    }
+}
 
 CounterAction.propTypes = {
     score: React.PropTypes.number.isRequired,
