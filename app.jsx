@@ -6,21 +6,22 @@ class App extends React.Component {
             players: [
                 {
                     name: "Dragos",
-                    score: 32,
+                    score: 1,
                     id:1
-                },
-                {
-                    name: "Mihail",
-                    score: 31,
-                    id:2
-                },
-                {
-                    name: "John",
-                    score: 44,
-                    id:3
                 }
             ]
         }
+        this.onScoreChange = this.onScoreChange.bind(this);
+    }
+
+    onScoreChange(index, delta) {
+        let user = this.state.players[index];
+        delta === -1 && user.score <= 0 ? user.score = 0 : user.score+=delta;
+        this.setState(prevState=>{
+            return {
+                players: prevState.players.splice(index, 1).splice(index, 1, user)
+            }
+        });
     }
 
     render() {
@@ -28,10 +29,10 @@ class App extends React.Component {
             <div className="scoreboard">
                 <Header title="ScoreBoard" />
                 <div className="players">
-                    {this.state.players.map(player => {
+                    {this.state.players.map((player, index) => {
                         return (
                             <Player
-                                onScoreChange={function (index,delta) { this.onScoreChange(index, delta)}}
+                                onScoreChange={delta=>this.onScoreChange(index, delta)}
                                 name={player.name}
                                 score={player.score}
                                 key={player.id} />
