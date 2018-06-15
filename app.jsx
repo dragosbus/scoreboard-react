@@ -49,7 +49,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="scoreboard">
-                <Header title="ScoreBoard" />
+                <Header title="ScoreBoard" numberOfPlayers={this.state.players.length} players={this.state.players}/>
                 <div className="players">
                     {this.state.players.map((player, index) => {
                         return (
@@ -68,10 +68,21 @@ class App extends React.Component {
 }
 
 const Header = props => {
+    let totalScore = props.players.reduce((acc,n)=>acc+n.score,0);
     return (
         <header className="header">
+            <Stats numberOfPlayers={props.numberOfPlayers} totalScore={totalScore}/>
             <h1>{props.title}</h1>
         </header>
+    );
+};
+
+const Stats = props =>{
+    return (
+        <div className="stats">
+            <p>Players: {props.numberOfPlayers}</p>
+            <p>Total Score: {props.totalScore}</p>
+        </div>
     );
 };
 
