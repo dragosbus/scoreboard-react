@@ -18,10 +18,9 @@ class App extends React.Component {
     onScoreChange(index, delta) {
         let user = this.state.players[index];
         delta === -1 && user.score <= 0 ? user.score = 0 : user.score+=delta;
-        this.setState(prevState=>{
-            return {
-                players: prevState.players.splice(index, 1).splice(index, 1, user)
-            }
+        this.state.players.splice(index, 1, user)
+        this.setState({
+            players: this.state.players
         });
     }
 
