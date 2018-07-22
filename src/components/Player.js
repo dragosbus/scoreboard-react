@@ -4,7 +4,7 @@ import Counter from './Counter';
 const Player = props =>{
     return(
         <div className="player">
-            <div className="player-name">
+            <div className="player-name" onClick={()=>props.showDetail(props.index)}>
                 <a className="remove-player" onClick={()=> props.removePlayer(props.index)}>x</a>
                 {props.name}
             </div>

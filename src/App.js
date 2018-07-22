@@ -5,6 +5,7 @@ import * as PlayerActionCreators from './actions/player';
 import Header from './components/Header';
 import Player from './components/Player';
 import AddPlayerForm from './components/AddPlayerForm';
+import PlayerDetail from './components/PlayerDetail';
 
 
 
@@ -26,12 +27,11 @@ class App extends Component {
     }
 
     render() {
-
-        const {dispatch, players} = this.props;
+        const {dispatch, players, selectedIndex} = this.props;
         const addPlayer = bindActionCreators(PlayerActionCreators.addPlayer, dispatch);
         const removePlayer = bindActionCreators(PlayerActionCreators.removePlayer, dispatch);
         const updatePlayerScore = bindActionCreators(PlayerActionCreators.updatePlayerScore, dispatch);
-
+        const showDetail = bindActionCreators(PlayerActionCreators.showDetail, dispatch);
         const playerComponent = players.map((player,index)=>{
             return <Player
                     index={index}
@@ -40,6 +40,7 @@ class App extends Component {
                     key={player.name}
                     updatePlayerScore={updatePlayerScore}
                     removePlayer={removePlayer}
+                    showDetail={showDetail}
                    />
         });
 
@@ -50,6 +51,7 @@ class App extends Component {
                     {playerComponent}
                 </div>
                 <AddPlayerForm addPlayer={addPlayer}/>
+                <PlayerDetail players={players} selectedIndex={selectedIndex}/>
             </div>
         );
     }
@@ -57,7 +59,8 @@ class App extends Component {
 
 const mapStateToProps = state => (
     {
-        players: state
+        players: state.players,
+        selectedIndex: state.selectedIndex
     }
 );
 

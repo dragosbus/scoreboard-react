@@ -22,3 +22,10 @@ export const updatePlayerScore = (index, score) => {
         score
     }
 };
+
+export const showDetail = (index) => {
+    return {
+        type: PlayerActionTypes.SHOW_DETAILS,
+        index
+    }
+};
