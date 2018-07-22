@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header';
-import Stopwatch from './components/Stopwatch';
-import Stats from './components/Stats';
-import Counter from './components/Counter';
+import Player from './components/Player';
+import AddPlayerForm from './components/AddPlayerForm';
 
 const Players = [
     {
