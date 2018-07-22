@@ -33,7 +33,7 @@ const playerReducer = (state=initialState, action) => {
             return state.map((player,index) => {
                 if(index === action.index) {
                     return {
-                        ...player,
+                        name: player.name,
                         score: player.score + action.score
                     };
                 }

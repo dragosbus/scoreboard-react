@@ -13,20 +13,20 @@ class AddPlayerForm extends Component {
         this.setState({name: name});
     }
 
-    onSubmit(e) {
+    addPlayer(e) {
         e.preventDefault();
-        this.props.onAdd(this.state.name);
+        this.props.addPlayer(this.state.name);
         this.setState({name: ''})
     }
 
     render() {
         return(
             <div className="add-player-form">
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.addPlayer.bind(this)}>
                     <input
                         type="text"
                         value={this.state.name}
-                        onChange={this.onNameChange}
+                        onChange={this.onNameChange.bind(this)}
                         placeholder="Player Name"
                     />
                     <input type="submit" value="Add Player"/>
