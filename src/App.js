@@ -46,7 +46,9 @@ class App extends Component {
 
     render() {
         return(
-            <Header players={this.state.players}/>
+            <div className="scoreboard">
+                <Header players={this.state.players}/>
+            </div>
         );
     }
 }
