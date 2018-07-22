@@ -2,7 +2,7 @@ import React from 'react';
 
 const Stats = props => {
     const playerCount = props.players.length;
-    const totalPoints = props.players.reduce((totalPoints, player) => total.player.score, 0);
+    const totalPoints = props.players.reduce((totalPoints, player) => totalPoints + player.score, 0);
 
     return(
         <table className="stats">

@@ -11,6 +11,7 @@ class Stopwatch extends Component {
         this.onStart = this.onStart.bind(this);
         this.onStop = this.onStop.bind(this);
         this.onReset = this.onReset.bind(this);
+        this.onTick = this.onTick.bind(this);
     }
 
     componentDidMount() {
