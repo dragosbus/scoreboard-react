@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Players = [
     {
         name: "Dragos",
@@ -101,7 +103,4 @@ Player.propTypes = {
     onScoreChange: React.PropTypes.func.isRequired
 };
 
-ReactDOM.render(
-    <App initialPlayers={Players}/>,
-    document.getElementById("container")
-);
+export default App;
