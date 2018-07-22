@@ -6,7 +6,7 @@ const Player = props =>{
         <div className="player">
             <div className="player-name">
                 <a className="remove-player" onClick={()=> props.removePlayer(props.index)}>x</a>
-                <p onClick={()=>props.showDetail(props.index)}>{props.name}</p>
+                <span onClick={()=>props.showDetail(props.index)}>{props.name}</span>
             </div>
             <div className="player-score">
                 <Counter

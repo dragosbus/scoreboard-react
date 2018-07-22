@@ -28,11 +28,19 @@ const initialState = {
 };
 
 const playerReducer = (state=initialState, action) => {
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
     switch(action.type) {
         case PlayerActionTypes.ADD_PLAYER:
             return {
                 players: [...state.players, 
-                    {name: action.name, score: 0}
+                    {name: action.name, 
+                    score: 0,
+                    created: `${month}/${day}/${year}`
+                    }
                 ],
                 selectedIndex: -1
             };
@@ -49,7 +57,9 @@ const playerReducer = (state=initialState, action) => {
                 if(index === action.index) {
                     return {
                         name: player.name,
-                        score: player.score + action.score
+                        score: player.score + action.score,
+                        created: player.created,
+                        updated: `${month}/${day}/${year}`
                     };
                 }
                 return player;
