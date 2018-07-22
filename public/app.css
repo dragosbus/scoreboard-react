@@ -7,7 +7,7 @@ body {
 
 .scoreboard {
     background: #333;
-    width: 700px;
+    width: 100%;
     margin: 70px auto;
     box-shadow: 0 4px 0px #333;
     border-radius: 15px;
@@ -103,9 +103,11 @@ body {
     margin-right: 10px;
     color: #e57373;
     cursor: pointer;
+    background: none;
+    border: none;
 }
 
-.player-name:hover .remove-player {
+.player:hover .remove-player {
     visibility: visible;
 }
 
